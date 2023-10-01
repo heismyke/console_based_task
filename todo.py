@@ -2,9 +2,9 @@ import uuid
 import json
 
 # Load existing tasks or initialize an empty list
-filename = "./tasks.json"
+server_path = "https://tasksjson.vercel.app/tasks.json"
 try:
-    with open(filename, "r") as json_file:
+    with open(server_path, "r") as json_file:
         tasks = json.load(json_file)
 except FileNotFoundError:
     tasks = []
@@ -24,15 +24,15 @@ while True:
         tasks.append(task)
 
 # Save the updated tasks to the JSON file
-with open(filename, "w") as json_file:
+with open(server_path, "w") as json_file:
     json.dump(tasks, json_file)
 
 # Print the tasks
-def load_tasks(filename):
-    with open(filename, "r") as json_file:
+def load_tasks(server_path):
+    with open(server_path, "r") as json_file:
         data = json.load(json_file)
         for task in data:
             print(f'The id is {task["id"]} and task is {task["title"]}')
         return data
 
-loaded_tasks = load_tasks(filename)
+loaded_tasks = load_tasks(server_path)
